@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% for post in post_list %}
+<!-- post_list가 10개라고 가정하면 -->
+<ul>
+  <li>{{ post.author.profile.nickname }}</li>
+  <!-- 1. post 인스턴스별로 post와 N:1 관계인 author 모델에 접근 -->
+  <!-- 2. author 모델과 1:1 관계인 profile 모델에 접근하여 중복 작업이 발생한다 -->
+  <!-- 총 20번의 중복 발생 -->
+  <li>{{ post.content }}</li>
+  <li>{% for tag in post.tag_set.all %} {{ tag.name }} {% endfor %}</li>
+  <!-- 3. post 인스턴스별로 post와 N:M 관계인 tag 모델에 접근 -->
+  <!-- 추가적으로 10번의 중복 발생 -->
+</ul>
+{% endfor %}
+</body>
+</html>
