@@ -42,6 +42,10 @@ INSTALLED_APPS = [
 
     # for check queryset
     'debug_toolbar',
+
+    'rest-framework',
+    'drf_yasg',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

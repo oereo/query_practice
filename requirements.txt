@@ -1,0 +1,3 @@
+djangorestframework==3.11.0  
+drf-yasg==1.17.1  
+django-extensions  

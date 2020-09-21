@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Post
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 
 def post_list(request):
     # 33Queries(including 31 similar and 19 duplicates) in 12.98ms
@@ -17,3 +20,12 @@ def post_list(request):
     post_list = Post.objects.prefetch_related('tag_set').select_related('author__profile').all()
     
     return render(request, 'post_list.html', {'post_list' : post_list})
+
+@api_view(['GET']) 
+def status_check(request):
+    """
+    서버의 상태를 확인하는 함수입니다.
+    """
+    return Response({
+        "status": "OK"
+    }, status=status.HTTP_200_OK)
